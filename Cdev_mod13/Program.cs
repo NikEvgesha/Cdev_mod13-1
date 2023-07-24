@@ -5,8 +5,10 @@ class Program
 {
     static void Main(string[] args)
     {
+        string filePath = Path.Combine(Environment.CurrentDirectory.Replace("\\bin\\Debug\\net6.0", ""), "cdev-text.txt");
+        
         Stopwatch stopwatch = new Stopwatch();
-        string text = File.ReadAllText("cdev-text.txt");
+        string text = File.ReadAllText(filePath);
         char[] delimiters = new char[] { ' ', '\r', '\n' };
         var words = text.Split(delimiters, StringSplitOptions.RemoveEmptyEntries);
 
@@ -14,16 +16,14 @@ class Program
         LinkedList<string>  linkedList = new LinkedList<string>();
 
         stopwatch.Start();
-
         foreach (string word in words)
         {
             list.Add(word);
         }
-
         stopwatch.Stop();
         Console.WriteLine("Runtime for list: " + stopwatch.Elapsed);
-        stopwatch.Restart();
 
+        stopwatch.Restart();
         foreach (string word in linkedList) 
         { 
             linkedList.AddLast(word);
